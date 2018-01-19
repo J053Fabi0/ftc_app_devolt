@@ -26,8 +26,6 @@ public class T_TEST_CLAW_1 extends OpMode{
     @Override
     public void init() {
 
-        telemetry.addData("")
-
         left = hardwareMap.dcMotor.get("leftMotor");
         right = hardwareMap.dcMotor.get("rightMotor");
         elevator = hardwareMap.dcMotor.get("elevatorMotor");
@@ -43,6 +41,7 @@ public class T_TEST_CLAW_1 extends OpMode{
         left.setPower(gamepad1.left_stick_y);
         right.setPower(-gamepad1.right_stick_y);
         elevator.setPower(gamepad1.right_trigger * 0.7);
+        elevator.setPower(gamepad1.left_trigger * -0.7);
 
     }
 }
