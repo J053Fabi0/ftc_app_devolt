@@ -22,15 +22,17 @@ public class A_TEST_MOVE_1 extends OpMode {
 
     @Override
     public void loop() {
+
         for (int time = 0; time == 100; time++) {
             driveR.setPower(.1);
             driveL.setPower(.1);
-            telemetry.addData("DERECHO", "TIEMPO - ", time);
-            for (int reverseTime = 0; time == 100; reverseTime++) {
-                driveR.setPower(-.1);
-                driveL.setPower(-.1);
-                telemetry.addData("REVERSA", "TIEMPO - ", reverseTime);
-            }
+            telemetry.addData("DERECHO", "TIEMPO: " + time);
+        }
+
+        for (int reverseTime = 0; reverseTime == 100; reverseTime++) {
+            driveR.setPower(-0.1);
+            driveL.setPower(-0.1);
+            telemetry.addData("REVERSA", "TIEMPO: ", reverseTime);
         }
     }
 }

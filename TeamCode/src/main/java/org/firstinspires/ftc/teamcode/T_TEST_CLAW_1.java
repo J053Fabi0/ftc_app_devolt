@@ -26,6 +26,8 @@ public class T_TEST_CLAW_1 extends OpMode{
     @Override
     public void init() {
 
+        telemetry.addData("")
+
         left = hardwareMap.dcMotor.get("leftMotor");
         right = hardwareMap.dcMotor.get("rightMotor");
         elevator = hardwareMap.dcMotor.get("elevatorMotor");
@@ -38,26 +40,9 @@ public class T_TEST_CLAW_1 extends OpMode{
 
     @Override
     public void loop() {
-
-        telemetry.addData("Pos1", pos1);
-        telemetry.addData("Pos2", pos2);
-        telemetry.addData("Actual pos1", claw1.getPosition());
-        telemetry.addData("Actual pos2", claw2.getPosition());
-        telemetry.addData("gamepad a", gamepad1.a);
-
         left.setPower(gamepad1.left_stick_y);
         right.setPower(-gamepad1.right_stick_y);
-        elevator.setPower(gamepad1.right_trigger);
-
-
-
-        if (gamepad1.a) {
-            claw1.setPosition(0.1);
-            claw2.setPosition(-0.1);
-        } else {
-            claw1.setPosition(0.02);
-            claw2.setPosition(0.02);
-        }
+        elevator.setPower(gamepad1.right_trigger * 0.7);
 
     }
 }
