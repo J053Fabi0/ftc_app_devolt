@@ -41,6 +41,9 @@ public class A_TEST_ENCODER_1 extends OpMode {
         while (left.isBusy() && right.isBusy()) {
             telemetry.addData("FUNCIONA:","SI");
         }
+        left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
     }
 
     public void move(int p) {
