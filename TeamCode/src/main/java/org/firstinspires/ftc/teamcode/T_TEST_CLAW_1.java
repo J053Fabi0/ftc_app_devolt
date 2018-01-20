@@ -42,7 +42,7 @@ public class T_TEST_CLAW_1 extends OpMode{
 
         if (gamepad1.a) {
             claw1.setPosition(0.8);
-            claw2.setPosition(0.5);
+            claw2.setPosition(0.2);
         }
         else {
             claw1.setPosition(0.95);
