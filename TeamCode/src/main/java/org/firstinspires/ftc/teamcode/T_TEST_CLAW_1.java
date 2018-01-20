@@ -21,7 +21,6 @@ public class T_TEST_CLAW_1 extends OpMode{
     public Servo claw1;
     public Servo claw2;
     public double pos1;
-    public double pos2;
 
     @Override
     public void init() {
@@ -31,8 +30,6 @@ public class T_TEST_CLAW_1 extends OpMode{
         elevator = hardwareMap.dcMotor.get("elevatorMotor");
         claw1 = hardwareMap.servo.get("1stClawServo");
         claw2 = hardwareMap.servo.get("2ndClawServo");
-        pos1 = claw1.getPosition();
-        pos2 = claw2.getPosition();
 
     }
 
@@ -43,5 +40,13 @@ public class T_TEST_CLAW_1 extends OpMode{
         elevator.setPower(gamepad1.right_trigger * 0.7);
         elevator.setPower(gamepad1.left_trigger * -0.7);
 
+        if (gamepad1.a) {
+            claw1.setPosition(0.8);
+            claw2.setPosition(0.2);
+        }
+        else {
+            claw1.setPosition(0.95);
+            claw2.setPosition(0.002);
+        }
     }
 }
