@@ -21,6 +21,7 @@ public class T_TEST_CLAW_1 extends OpMode{
     public Servo claw1;
     public Servo claw2;
     public double pos1;
+    public double pos2;
 
     @Override
     public void init() {
@@ -30,23 +31,37 @@ public class T_TEST_CLAW_1 extends OpMode{
         elevator = hardwareMap.dcMotor.get("elevatorMotor");
         claw1 = hardwareMap.servo.get("1stClawServo");
         claw2 = hardwareMap.servo.get("2ndClawServo");
+        pos1 = claw1.getPosition();
+        pos2 = claw2.getPosition();
+        claw1.setPosition(0.02);
+        claw2.setPosition(1);
 
     }
 
     @Override
     public void loop() {
+
+        telemetry.addData("Pos1", pos1);
+        telemetry.addData("Pos2", pos2);
+        telemetry.addData("Actual pos1", claw1.getPosition());
+        telemetry.addData("Actual pos2", claw2.getPosition());
+        telemetry.addData("gamepad a", gamepad1.a);
+
         left.setPower(gamepad1.left_stick_y);
         right.setPower(-gamepad1.right_stick_y);
-        elevator.setPower(gamepad1.right_trigger * 0.7);
-        elevator.setPower(gamepad1.left_trigger * -0.7);
+        elevator.setPower(gamepad2.right_trigger);
+        elevator.setPower(-gamepad2.left_trigger);
 
-        if (gamepad1.a) {
-            claw1.setPosition(0.8);
-            claw2.setPosition(0.2);
+
+
+        if (gamepad2.a) {
+            claw1.setPosition(0.02);
+            claw2.setPosition(1);
         }
-        else {
-            claw1.setPosition(0.95);
-            claw2.setPosition(0.002);
+        else if (gamepad2.b) {
+            claw1.setPosition(.2);
+            claw2.setPosition(.8);
         }
+
     }
 }

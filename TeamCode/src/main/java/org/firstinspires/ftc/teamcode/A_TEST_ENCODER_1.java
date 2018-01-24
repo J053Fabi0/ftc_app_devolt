@@ -15,7 +15,8 @@ public class A_TEST_ENCODER_1 extends OpMode {
     public DcMotor left;
     public DcMotor right;
     public DcMotor elevator;
-
+    public Servo claw1;
+    public Servo claw2;
     @Override
     public void init() {
         left = hardwareMap.dcMotor.get("leftMotor");
@@ -24,6 +25,8 @@ public class A_TEST_ENCODER_1 extends OpMode {
         left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        claw1 = hardwareMap.servo.get("1stClawServo");
+        claw2 = hardwareMap.servo.get("2ndClawServo");
     }
 
     @Override
@@ -32,9 +35,13 @@ public class A_TEST_ENCODER_1 extends OpMode {
         left.setMode(DcMotor.RunMode.RESET_ENCODERS);
         right.setMode(DcMotor.RunMode.RESET_ENCODERS);
         elevator.setMode(DcMotor.RunMode.RESET_ENCODERS);
-        move(1120);
-        move(1100);
-        move(1200);
+        mover(3120,3120,0);
+        mover(3120,-3120,0);
+        mover(3120,3120,0);
+        mover(-3120,3120,0);
+        mover(3120,3120,0);
+        mover( 0,0,1120);
+        Abrir();
         left.setPower(.25);
         right.setPower(.25);
         elevator.setPower(.25);
@@ -43,15 +50,29 @@ public class A_TEST_ENCODER_1 extends OpMode {
         }
         left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        stop();
 
     }
 
-    public void move(int p) {
-        left.setTargetPosition(p);
-        right.setTargetPosition(p);
-        elevator.setTargetPosition(p);
+    public void mover(int pl, int pr, int pe) {
+        left.setTargetPosition(pl);
+        right.setTargetPosition(pr);
+        elevator.setTargetPosition(pe);
         left.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         right.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+    public void stop() {
+        left.setPower(0);
+        right.setPower(0);
+
+    }
+    public void Abrir(){
+        claw1.setPosition(.002);
+        claw2.setPosition(1);
+    }
+    public void Cerrar(){
+        claw1.setPosition(.2);
+        claw2.setPosition(.8);
     }
 }

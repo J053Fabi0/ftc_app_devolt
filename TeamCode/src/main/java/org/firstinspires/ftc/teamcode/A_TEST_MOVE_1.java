@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 /**
- * Created by linksake on 16/01/18.
+ * Created by Ivan on 19/01/18.
  */
 
 @Autonomous (name = "Movimiento 1", group = "Pruebas")
@@ -22,17 +22,15 @@ public class A_TEST_MOVE_1 extends OpMode {
 
     @Override
     public void loop() {
-
         for (int time = 0; time == 100; time++) {
             driveR.setPower(.1);
             driveL.setPower(.1);
-            telemetry.addData("DERECHO", "TIEMPO: " + time);
-        }
-
-        for (int reverseTime = 0; reverseTime == 100; reverseTime++) {
-            driveR.setPower(-0.1);
-            driveL.setPower(-0.1);
-            telemetry.addData("REVERSA", "TIEMPO: ", reverseTime);
+            telemetry.addData("DERECHO", "TIEMPO - ", time);
+            for (int reverseTime = 0; time == 100; reverseTime++) {
+                driveR.setPower(-.1);
+                driveL.setPower(-.1);
+                telemetry.addData("REVERSA", "TIEMPO - ", reverseTime);
+            }
         }
     }
 }
