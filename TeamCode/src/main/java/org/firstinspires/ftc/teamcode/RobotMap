@@ -1,0 +1,12 @@
+En este docuemnto se tiene los nombres y las ubicaciónes de los motores, servos y demas partes del robot.
+
+alpha:
+    Motores
+        0 - NerveRest 40 Gearmotor = rightMotor
+        1 - NerveRest 40 Gearmotor = leftMotor
+        2 - NerveRest 40 Gearmotor = elevatorMotor
+
+    Servos
+        0 - Servo = 1stClawServo
+        1 - Servo = 2stClawServo
+        2 - Servo = colorServo
