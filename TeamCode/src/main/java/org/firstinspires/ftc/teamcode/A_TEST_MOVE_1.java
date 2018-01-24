@@ -16,8 +16,8 @@ public class A_TEST_MOVE_1 extends OpMode {
 
     @Override
     public void init() {
-        driveR = hardwareMap.dcMotor.get("driveR");
-        driveL = hardwareMap.dcMotor.get("driveL");
+        driveR = hardwareMap.dcMotor.get("rightMotor");
+        driveL = hardwareMap.dcMotor.get("leftMotor");
     }
 
     @Override

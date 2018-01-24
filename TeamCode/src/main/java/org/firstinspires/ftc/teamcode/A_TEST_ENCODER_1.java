@@ -32,15 +32,15 @@ public class A_TEST_ENCODER_1 extends OpMode {
     @Override
     public void loop() {
 
-        left.setMode(DcMotor.RunMode.RESET_ENCODERS);
-        right.setMode(DcMotor.RunMode.RESET_ENCODERS);
-        elevator.setMode(DcMotor.RunMode.RESET_ENCODERS);
+        left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         mover(3120,3120,0);
         mover(3120,-3120,0);
         mover(3120,3120,0);
         mover(-3120,3120,0);
         mover(3120,3120,0);
-        mover( 0,0,1120);
+        mover( 0,0,0);
         Abrir();
         left.setPower(.25);
         right.setPower(.25);
