@@ -51,7 +51,7 @@ import com.qualcomm.robotcore.util.Range;
  */
 
 @TeleOp(name="Movimiento 1 ", group="Pruebas")
-//@Disabled
+@Disabled
 public class T_TEST_MOVE_1 extends OpMode
 {
     // Declare OpMode members.
