@@ -41,11 +41,7 @@ public class T_TEST_CLAW_1 extends OpMode{
     @Override
     public void loop() {
 
-        telemetry.addData("Pos1", pos1);
-        telemetry.addData("Pos2", pos2);
-        telemetry.addData("Actual pos1", claw1.getPosition());
-        telemetry.addData("Actual pos2", claw2.getPosition());
-        telemetry.addData("gamepad a", gamepad1.a);
+        telemetry.addData("¡Funcionando!", "Si");
 
         left.setPower(gamepad1.left_stick_y);
         right.setPower(-gamepad1.right_stick_y);
