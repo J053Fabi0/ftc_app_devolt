@@ -45,18 +45,19 @@ public class T_TEST_CLAW_1 extends OpMode{
 
         left.setPower(gamepad1.left_stick_y);
         right.setPower(-gamepad1.right_stick_y);
-        elevator.setPower(gamepad2.right_stick_y);
-        elevator.setPower(-gamepad2.right_stick_y);
-        if (gamepad2.right_stick_y > 0){
-            telemetry.addData("ELEVADOR","Ahrre (?");
-        }
+
+        elevator.setPower(gamepad2.right_trigger);
+        telemetry.addData("Right Trigger power: ", gamepad2.right_trigger);
+
+        elevator.setPower(-gamepad2.left_trigger);
+        telemetry.addData("Left Trigger power: ", gamepad2.left_trigger);
         
         if (gamepad2.a) {
             claw1.setPosition(0.02);
             claw2.setPosition(1);
         }
         else if (gamepad2.b) {
-            claw1.setPosition(.7);
+            claw1.setPosition(.3);
             claw2.setPosition(.7);
         }
 
