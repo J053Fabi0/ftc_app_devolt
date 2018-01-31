@@ -18,10 +18,10 @@ public class T_TEST_CLAW_1 extends OpMode{
     public DcMotor left;
     public DcMotor right;
     public DcMotor elevator;
-    public Servo claw1;
-    public Servo claw2;
-    public double pos1;
-    public double pos2;
+    public Servo claw1; // Garra 1
+    public Servo claw2; // Garra 2
+    public Servo claw3; // Motor del sensor de color
+    public Servo claw4; // Garra de reliquia
 
     @Override
     public void init() {
@@ -31,10 +31,13 @@ public class T_TEST_CLAW_1 extends OpMode{
         elevator = hardwareMap.dcMotor.get("elevatorMotor");
         claw1 = hardwareMap.servo.get("1stClawServo");
         claw2 = hardwareMap.servo.get("2ndClawServo");
-        pos1 = claw1.getPosition();
-        pos2 = claw2.getPosition();
+        claw3 = hardwareMap.servo.get("3rdClawServo");
+        claw4 = hardwareMap.servo.get("4thClawServo");
+
+        // Poner las garras en su posicion
         claw1.setPosition(0.02);
         claw2.setPosition(1);
+        claw4.setPosition(0.7);
 
     }
 
@@ -59,6 +62,16 @@ public class T_TEST_CLAW_1 extends OpMode{
         else if (gamepad2.b) {
             claw1.setPosition(.3);
             claw2.setPosition(.7);
+        }
+
+        telemetry.addData("gamepad2.x: ", gamepad2.x);
+        telemetry.addData("gamepad2.y: ", gamepad2.y);
+
+        // Garra de reliquia
+        if(gamepad2.x) {
+            claw4.setPosition(0.7);
+        }else if(gamepad2.y) {
+            claw4.setPosition(0.3);
         }
 
     }
