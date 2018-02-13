@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  */
 
 @TeleOp(name = "Color", group = "Pruebas")
-//@Disabled
+@Disabled
 public class T_TEST_COLOR extends OpMode{
 
     public DcMotor left;

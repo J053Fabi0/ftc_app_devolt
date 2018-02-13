@@ -1,0 +1,8 @@
+1.- Al iniciar, deberá dejar caer la cola con el sensor al punto medio entre las esferas y tiran la esfera del color
+    opuesto al de la alianza (i.e. Alianza roja tira azul).
+2.- Cuano tire la esfera, la cola debe subir.
+3.- El robot sale de la tabla de equilibrio y gira para leer el pictograma (o leerlo al terminar de tirar las esferas).
+4.- El pictograma dirá donde dejar el cubo (centro, derecha o izquierda).
+5.- Una vez dejado el cubo, debera estacionarse hacia al frente
+
+TODO EN 30 SEGUNDOS
