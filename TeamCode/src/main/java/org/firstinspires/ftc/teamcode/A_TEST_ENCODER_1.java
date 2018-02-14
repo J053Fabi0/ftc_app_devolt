@@ -41,12 +41,12 @@ public class A_TEST_ENCODER_1 extends OpMode {
         mover(-3120,3120,0);
         mover(3120,3120,0);
         mover( 0,0,0);
-        Abrir();
+        abrir();
         left.setPower(.25);
         right.setPower(.25);
         elevator.setPower(.25);
         while (left.isBusy() && right.isBusy()) {
-            telemetry.addData("FUNCIONA:","SI");
+            telemetry.addData("Movimiento:","SI");
         }
         left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -67,11 +67,11 @@ public class A_TEST_ENCODER_1 extends OpMode {
         right.setPower(0);
 
     }
-    public void Abrir(){
+    public void abrir(){
         claw1.setPosition(.002);
         claw2.setPosition(1);
     }
-    public void Cerrar(){
+    public void cerrar(){
         claw1.setPosition(.2);
         claw2.setPosition(.8);
     }
