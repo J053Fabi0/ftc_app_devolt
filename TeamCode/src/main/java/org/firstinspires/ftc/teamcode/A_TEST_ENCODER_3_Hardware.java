@@ -59,6 +59,8 @@ public class A_TEST_ENCODER_3_Hardware
     public DcMotor  elevator   = null;
     public Servo    claw1    = null;
     public Servo    claw2   = null;
+    public Servo    claw3   = null;
+
 
     public static final double MID_SERVO       =  0.5 ;
     //public static final double ARM_UP_POWER    =  0.45 ;
@@ -99,8 +101,11 @@ public class A_TEST_ENCODER_3_Hardware
         // Define and initialize ALL installed servos.
         claw1  = hwMap.get(Servo.class, "1stClawServo");
         claw2 = hwMap.get(Servo.class, "2ndClawServo");
-        claw1.setPosition(MID_SERVO);
-        claw2.setPosition(MID_SERVO);
+        claw3 = hwMap.get(Servo.class, "colorServo");
+        claw1.setPosition(0.02);
+        claw2.setPosition(1);
+        claw3.setPosition(0.5);
+
     }
  }
 

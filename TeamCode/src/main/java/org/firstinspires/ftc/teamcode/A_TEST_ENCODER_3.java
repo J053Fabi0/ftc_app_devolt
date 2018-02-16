@@ -53,35 +53,34 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        // Step through each leg of the path,
-        // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  11.811,  11.811, .1);  // Se mueve para enfrente 30cm en .1 segundo
+        encoderDrive(-DRIVE_SPEED,  11.811,  11.811, .1);  // Se mueve para enfrente 30cm en .1 segundo
 
-        robot.claw1.setPosition(1.0);            // S4: Stop and close the claw.
-        robot.claw2.setPosition(0.0);
+        robot.claw1.setPosition(0.3);
+        robot.claw2.setPosition(0.7);
+
         sleep(1000);     // pause for servos to move
+
+        moverElevador(0.5, -1);
+
+        sleep(4000);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
     }
 
-    /*
-     *  Method to perfmorm a relative move, based on encoder counts.
-     *  Encoders are not reset as the move is based on the current position.
-     *  Move will stop if any of three conditions occur:
-     *  1) Move gets to the desired position
-     *  2) Move runs out of time
-     *  3) Driver stops the opmode running.
-     */
-    public void encoderDrive(double speed,
-                             double leftInches, double rightInches,
-                             double timeoutS) {
+    public void moverElevador(double timeoutS, double speed) {
+        robot.elevator.setPower(speed);
+        runtime.reset();
+        while (runtime.time() < timeoutS) {}
+        robot.elevator.setPower(0);
+    }
+
+    public void encoderDrive(double speed, double leftInches, double rightInches, double timeoutS) {
         int newLeftTarget;
         int newRightTarget;
 
         // Ensure that the opmode is still active
         if (opModeIsActive()) {
-
             // Determine new target position, and pass to motor controller
             newLeftTarget = robot.left.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
             newRightTarget = robot.right.getCurrentPosition() + (int) (rightInches * COUNTS_PER_INCH);

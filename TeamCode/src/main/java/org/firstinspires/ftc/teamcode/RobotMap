@@ -10,6 +10,9 @@ alpha:
         0 - Servo = 1stClawServo
         1 - Servo = 2stClawServo
         2 - Servo = colorServo
+        3 - Servo = 4thClawServo
+        4 - Servo = 5thClawServo
+        5 - Servo = 6thClawServo
 
     Sensores **** AÑADIR A CONFIG ****
         x = colorSensor
