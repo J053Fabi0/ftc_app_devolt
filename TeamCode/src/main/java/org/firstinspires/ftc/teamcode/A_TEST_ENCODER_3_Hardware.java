@@ -104,7 +104,7 @@ public class A_TEST_ENCODER_3_Hardware
         claw3 = hwMap.get(Servo.class, "colorServo");
         claw1.setPosition(0.02);
         claw2.setPosition(1);
-        claw3.setPosition(0.5);
+        claw3.setPosition(0.02);
 
     }
  }

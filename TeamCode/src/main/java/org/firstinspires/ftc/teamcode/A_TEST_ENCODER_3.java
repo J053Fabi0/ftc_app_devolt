@@ -53,16 +53,20 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        encoderDrive(-DRIVE_SPEED,  11.811,  11.811, .1);  // Se mueve para enfrente 30cm en .1 segundo
+        encoderDrive(DRIVE_SPEED,  -0.5,  -0.5, .1);  // Se mueve para enfrente 30cm en .1 segundo
+
+        robot.claw3.setPosition(0.5);
+        sleep(1000);
+        robot.claw3.setPosition(0.02);
+
+        encoderDrive(DRIVE_SPEED,  0.5,  0.5, .1);  // Se mueve para enfrente 30cm en .1 segundo
 
         robot.claw1.setPosition(0.3);
         robot.claw2.setPosition(0.7);
 
-        sleep(1000);     // pause for servos to move
-
         moverElevador(0.5, -1);
 
-        sleep(4000);
+
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
@@ -71,7 +75,7 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
     public void moverElevador(double timeoutS, double speed) {
         robot.elevator.setPower(speed);
         runtime.reset();
-        while (runtime.time() < timeoutS) {}
+        sleep((long) timeoutS * 1000);
         robot.elevator.setPower(0);
     }
 
