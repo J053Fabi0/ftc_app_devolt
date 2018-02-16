@@ -1,4 +1,4 @@
-1.- Al iniciar, deberá dejar caer la cola con el sensor al punto medio entre las esferas y tiran la esfera del color
+1.- Al iniciar, deberá dejar caer la cola con el sensor e ir de reversa hasta que quede o   oal punto medio entre las esferas y tiran la esfera del color
     opuesto al de la alianza (i.e. Alianza roja tira azul).
 2.- Cuano tire la esfera, la cola debe subir.
 3.- El robot sale de la tabla de equilibrio y gira para leer el pictograma (o leerlo al terminar de tirar las esferas).
@@ -6,3 +6,22 @@
 5.- Una vez dejado el cubo, debera estacionarse hacia al frente
 
 TODO EN 30 SEGUNDOS
+
+
+/****/
+
+Especifico
+
+1) Se hace ligeramente a atrás, solo para que la cola baje y tumbe la gema
+2) Bajar cola
+3) Leer color de la gema y tumbar la que sea necesaria
+4) Subir cola
+5) Giro de 90º a la derecha
+6) Leer pictograma y decidir path
+7) Giro de 90º a la izquierda
+8) Avanzar frente al rack y a la altura del triangulo rojo
+9) Avanazr n numero de pulgadas según el pictograma
+10) Grio de 90º para quedar de frente al rack de los cubos
+11) Dejar cubo
+
+Nota: Tienes que ser 2 OpMode, según la alianza. Uno tiene que ser mirror del otro.

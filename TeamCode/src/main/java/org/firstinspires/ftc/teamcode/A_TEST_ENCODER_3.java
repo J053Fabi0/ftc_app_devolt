@@ -16,8 +16,9 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
     A_TEST_ENCODER_3_Hardware         robot   = new A_TEST_ENCODER_3_Hardware() ;   // Use a Pushbot's hardware
     private ElapsedTime     runtime = new ElapsedTime();
 
-    static final double     COUNTS_PER_MOTOR_REV    = 3120 ;    // Andymark N everest 60 motor
-    static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // This is < 1.0 if geared UP
+    static final double     COUNTS_PER_MOTOR_REV    = 1220 ;    // Andymark N everest 60 motor
+    static final double     DRIVE_GEAR_REDUCTION    = 0.2
+            ;     // This is < 1.0 if geared UP
     static final double     WHEEL_DIAMETER_INCHES   = 3.8 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
                                                       (WHEEL_DIAMETER_INCHES * 3.14159265358979323846);
@@ -54,9 +55,7 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  48,  48, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
-        encoderDrive(TURN_SPEED,   12, -12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
-        encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,  11.811,  11.811, .1);  // Se mueve para enfrente 30cm en .1 segundo
 
         robot.claw1.setPosition(1.0);            // S4: Stop and close the claw.
         robot.claw2.setPosition(0.0);
@@ -84,8 +83,8 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            newLeftTarget = robot.left.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
-            newRightTarget = robot.right.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
+            newLeftTarget = robot.left.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
+            newRightTarget = robot.right.getCurrentPosition() + (int) (rightInches * COUNTS_PER_INCH);
             robot.left.setTargetPosition(newLeftTarget);
             robot.right.setTargetPosition(newRightTarget);
 
@@ -104,15 +103,15 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
             // always end the motion as soon as possible.
             // However, if you require that BOTH motors have finished their moves before the robot continues
             // onto the next step, use (isBusy() || isBusy()) in the loop test.
-            while  (opModeIsActive() &&
-                   (runtime.seconds() < timeoutS) &&
-                   (robot.left.isBusy() && robot.right.isBusy())) {
+            while (opModeIsActive() &&
+                    (runtime.seconds() < timeoutS) &&
+                    (robot.left.isBusy() && robot.right.isBusy())) {
 
                 // Display it for the driver.
-                telemetry.addData("Path1",  "Running to %7d :%7d", newLeftTarget,  newRightTarget);
-                telemetry.addData("Path2",  "Running at %7d :%7d",
-                                            robot.left.getCurrentPosition(),
-                                            robot.right.getCurrentPosition());
+                telemetry.addData("Path1", "Running to %7d :%7d", newLeftTarget, newRightTarget);
+                telemetry.addData("Path2", "Running at %7d :%7d",
+                        robot.left.getCurrentPosition(),
+                        robot.right.getCurrentPosition());
                 telemetry.update();
             }
 
