@@ -32,6 +32,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -60,6 +61,7 @@ public class A_TEST_ENCODER_3_Hardware
     public Servo    claw1    = null;
     public Servo    claw2   = null;
     public Servo    claw3   = null;
+    public NormalizedColorSensor colorSensor = null;
 
 
     public static final double MID_SERVO       =  0.5 ;
@@ -87,6 +89,8 @@ public class A_TEST_ENCODER_3_Hardware
         left.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
         right.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
 
+        colorSensor = hwMap.get(NormalizedColorSensor.class, "colorSensor");
+
         // Set all motors to zero power
         left.setPower(0);
         right.setPower(0);
@@ -104,7 +108,7 @@ public class A_TEST_ENCODER_3_Hardware
         claw3 = hwMap.get(Servo.class, "colorServo");
         claw1.setPosition(0.02);
         claw2.setPosition(1);
-        claw3.setPosition(0.5);
+        claw3.setPosition(0.02);
 
     }
  }
