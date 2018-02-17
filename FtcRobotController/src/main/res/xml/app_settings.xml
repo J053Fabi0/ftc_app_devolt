@@ -88,6 +88,12 @@ See https://developer.android.com/guide/topics/ui/settings.html
         android:targetClass="com.qualcomm.ftccommon.ViewLogsActivity" />
     </PreferenceScreen>
 
+    <PreferenceScreen
+        android:title="Puto el que lo lea"
+        android:summary="Así de sencillo te haces puto"
+        android:key="nope">
+    </PreferenceScreen>
+
   </PreferenceCategory>
 
 </PreferenceScreen>

@@ -33,7 +33,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
+import com.qualcomm.robotcore.hardware.NormalizedRGBA;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.SwitchableLight;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
@@ -62,6 +64,7 @@ public class A_TEST_ENCODER_3_Hardware
     public Servo    claw2   = null;
     public Servo    claw3   = null;
     public NormalizedColorSensor colorSensor = null;
+    public NormalizedRGBA colors = null;
 
 
     public static final double MID_SERVO       =  0.5 ;
@@ -90,6 +93,12 @@ public class A_TEST_ENCODER_3_Hardware
         right.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
 
         colorSensor = hwMap.get(NormalizedColorSensor.class, "colorSensor");
+        // Prendemos la luz del sensor por si las dudas
+        if (colorSensor instanceof SwitchableLight) {
+            ((SwitchableLight)colorSensor).enableLight(true);
+        }
+
+        colors = colorSensor.getNormalizedColors();
 
         // Set all motors to zero power
         left.setPower(0);
