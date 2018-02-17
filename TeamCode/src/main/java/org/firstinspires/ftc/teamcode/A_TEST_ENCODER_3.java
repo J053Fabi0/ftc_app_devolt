@@ -44,31 +44,21 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
         robot.left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        // Send telemetry message to indicate successful Encoder reset
-        telemetry.addData("Path0",  "Starting at %7d :%7d",
-                          robot.left.getCurrentPosition(),
-                          robot.right.getCurrentPosition());
-        telemetry.update();
-
-        // Wait for the game to start (driver presses PLAY)
+        // Espera a que le des play
         waitForStart();
 
+        // Baja el sensor a las pelotas ( ͡° ͜ʖ ͡°)
         robot.claw3.setPosition(0.5);
+
+        // Esera un segundo, pero aquí debería de estar el if para saber si es azul o rojo
         sleep(1000);
+
+        // Sube el sensor
         robot.claw3.setPosition(0.02);
 
-        // encoderDrive(DRIVE_SPEED,  2,  2, .1);  // Se mueve para enfrente 30cm en .1 segundo
-
+        // Cierra las garras para agarrar el bloque de enfrente
         robot.claw1.setPosition(0.3);
         robot.claw2.setPosition(0.7);
-
-        sleep(1000);
-        moverElevador(0.5, 1);
-
-
-
-        telemetry.addData("Path", "Complete");
-        telemetry.update();
     }
 
     public void moverElevador(double timeoutS, double speed) {
