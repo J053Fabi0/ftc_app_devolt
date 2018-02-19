@@ -53,21 +53,16 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
         // Esera un segundo, pero aquí debería de estar el if para saber si es azul o rojo
         sleep(1000);
 
-        Color.colorToHSV(robot.colors.toColor(), robot.hsvValues);
+        robot.colors = robot.colorSensor.getNormalizedColors();
 
         if (robot.colors.red > robot.colors.blue) {
             telemetry.addData("Ball Color", "Red");
         }else {
             telemetry.addData("Ball Color", "Blue");
         }
+        telemetry.update();
 
-        for (int i = 0; i < 5; i++) {
-            Color.colorToHSV(robot.colors.toColor(), robot.hsvValues);
-            telemetry.addData("R" + i, robot.colors.red);
-            telemetry.addData("B" + i, robot.colors.blue);
-            telemetry.update();
-            sleep(1000);
-        }
+        sleep(1000);
 
         // Sube el sensor
         robot.claw3.setPosition(0.02);
@@ -80,7 +75,7 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
         robot.claw2.setPosition(0.7);
 
         // Espera para que deje que los motores hagan lo suyo
-        sleep(1000);
+        sleep(5000);
     }
 
     public void moverElevador(double timeoutS, double speed) {
