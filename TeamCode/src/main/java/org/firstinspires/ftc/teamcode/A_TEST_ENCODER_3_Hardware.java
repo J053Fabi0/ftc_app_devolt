@@ -118,8 +118,6 @@ public class A_TEST_ENCODER_3_Hardware
         claw2.setPosition(1);
         claw3.setPosition(0.02);
 
-        Color.colorToHSV(colors.toColor(), hsvValues);
-
     }
  }
 
