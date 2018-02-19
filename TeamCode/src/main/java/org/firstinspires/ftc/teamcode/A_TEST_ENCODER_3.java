@@ -50,18 +50,41 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
         // Baja el sensor a las pelotas ( ͡° ͜ʖ ͡°)
         robot.claw3.setPosition(0.6);
 
-        // Esera un segundo, pero aquí debería de estar el if para saber si es azul o rojo
+        // Espera por precausión
         sleep(1000);
 
+        // Actualiza el sensor y determina si la pelota es azul o roja
         robot.colors = robot.colorSensor.getNormalizedColors();
+
+        double vel = 0.01;
+        int time = 500;
 
         if (robot.colors.red > robot.colors.blue) {
             telemetry.addData("Ball Color", "Red");
+
+            robot.right.setPower(vel);
+            robot.left.setPower(-vel);
+            sleep(time);
+            robot.right.setPower(-vel);
+            robot.left.setPower(vel);
+            sleep(time);
+            robot.right.setPower(0);
+            robot.left.setPower(0);
         }else {
             telemetry.addData("Ball Color", "Blue");
+
+            robot.right.setPower(-vel);
+            robot.left.setPower(vel);
+            sleep(time);
+            robot.right.setPower(vel);
+            robot.left.setPower(-vel);
+            sleep(time);
+            robot.right.setPower(0);
+            robot.left.setPower(0);
         }
         telemetry.update();
 
+        // Espera un poco... un poquiiiito mááááás
         sleep(1000);
 
         // Sube el sensor
