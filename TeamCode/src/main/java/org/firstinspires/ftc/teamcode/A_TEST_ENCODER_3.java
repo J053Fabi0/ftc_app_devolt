@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import android.graphics.Color;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.SwitchableLight;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
@@ -47,17 +48,41 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
         waitForStart();
 
         // Baja el sensor a las pelotas ( ͡° ͜ʖ ͡°)
-        robot.claw3.setPosition(0.5);
+        robot.claw3.setPosition(0.6);
 
         // Esera un segundo, pero aquí debería de estar el if para saber si es azul o rojo
         sleep(1000);
 
+        telemetry.addLine()
+                .addData("H", "%.3f", robot.hsvValues[0])
+                .addData("S", "%.3f", robot.hsvValues[1])
+                .addData("V", "%.3f", robot.hsvValues[2]);
+        telemetry.update();
+
+        sleep(2000);
+
+        Color.colorToHSV(robot.colors.toColor(), robot.hsvValues);
+
+        telemetry.addLine()
+                .addData("H2", "%.3f", robot.hsvValues[0])
+                .addData("S2", "%.3f", robot.hsvValues[1])
+                .addData("V2", "%.3f", robot.hsvValues[2]);
+        telemetry.update();
+
+        sleep(2000);
+
         // Sube el sensor
         robot.claw3.setPosition(0.02);
+
+        // Espera para que deje que los motores suban
+        sleep(1000);
 
         // Cierra las garras para agarrar el bloque de enfrente
         robot.claw1.setPosition(0.3);
         robot.claw2.setPosition(0.7);
+
+        // Espera para que deje que los motores hagan lo suyo
+        sleep(1000);
     }
 
     public void moverElevador(double timeoutS, double speed) {

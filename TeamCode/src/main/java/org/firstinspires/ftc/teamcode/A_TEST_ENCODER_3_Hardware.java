@@ -29,6 +29,8 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import android.graphics.Color;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -65,6 +67,7 @@ public class A_TEST_ENCODER_3_Hardware
     public Servo    claw3   = null;
     public NormalizedColorSensor colorSensor = null;
     public NormalizedRGBA colors = null;
+    public float[] hsvValues = new float[3];
 
 
     public static final double MID_SERVO       =  0.5 ;
@@ -93,10 +96,6 @@ public class A_TEST_ENCODER_3_Hardware
         right.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
 
         colorSensor = hwMap.get(NormalizedColorSensor.class, "colorSensor");
-        // Prendemos la luz del sensor por si las dudas
-        if (colorSensor instanceof SwitchableLight) {
-            ((SwitchableLight)colorSensor).enableLight(true);
-        }
 
         colors = colorSensor.getNormalizedColors();
 
@@ -118,6 +117,8 @@ public class A_TEST_ENCODER_3_Hardware
         claw1.setPosition(0.02);
         claw2.setPosition(1);
         claw3.setPosition(0.02);
+
+        Color.colorToHSV(colors.toColor(), hsvValues);
 
     }
  }
