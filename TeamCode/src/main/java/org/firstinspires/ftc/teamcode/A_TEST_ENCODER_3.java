@@ -1,9 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import android.graphics.Color;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.SwitchableLight;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
@@ -13,17 +14,16 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 public class A_TEST_ENCODER_3 extends LinearOpMode {
 
     /* Declare OpMode members. */
-    A_TEST_ENCODER_3_Hardware         robot   = new A_TEST_ENCODER_3_Hardware() ;   // Use a Pushbot's hardware
-    private ElapsedTime     runtime = new ElapsedTime();
+    A_TEST_ENCODER_3_Hardware robot = new A_TEST_ENCODER_3_Hardware() ;   // Use a Pushbot's hardware
+    private ElapsedTime runtime = new ElapsedTime();
 
-    static final double     COUNTS_PER_MOTOR_REV    = 1220 ;    // Andymark N everest 60 motor
-    static final double     DRIVE_GEAR_REDUCTION    = 0.2
+    static final double COUNTS_PER_MOTOR_REV = 1220 ; // Andymark N everest 60 motor
+    static final double DRIVE_GEAR_REDUCTION = 0.2
             ;     // This is < 1.0 if geared UP
-    static final double     WHEEL_DIAMETER_INCHES   = 3.8 ;     // For figuring circumference
-    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
-                                                      (WHEEL_DIAMETER_INCHES * 3.14159265358979323846);
-    static final double     DRIVE_SPEED             = 0.6;
-    static final double     TURN_SPEED              = 0.5;
+    static final double WHEEL_DIAMETER_INCHES = 3.8 ;     // For figuring circumference
+    static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.14159265358979323846);
+    static final double DRIVE_SPEED = 0.6;
+    static final double TURN_SPEED = 0.5;
 
     @Override
     public void runOpMode() {
@@ -44,34 +44,67 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
         robot.left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        // Send telemetry message to indicate successful Encoder reset
-        telemetry.addData("Path0",  "Starting at %7d :%7d",
-                          robot.left.getCurrentPosition(),
-                          robot.right.getCurrentPosition());
-        telemetry.update();
-
-        // Wait for the game to start (driver presses PLAY)
+        // Espera a que le des play
         waitForStart();
 
-        encoderDrive(-DRIVE_SPEED,  11.811,  11.811, .1);  // Se mueve para enfrente 30cm en .1 segundo
+        // Baja el sensor a las pelotas ( ͡° ͜ʖ ͡°)
+        robot.claw3.setPosition(0.6);
 
+        // Espera por precausión
+        sleep(1000);
+
+        // Actualiza el sensor y determina si la pelota es azul o roja
+        robot.colors = robot.colorSensor.getNormalizedColors();
+
+        double vel = 0.01;
+        int time = 500;
+
+        if (robot.colors.red > robot.colors.blue) {
+            telemetry.addData("Ball Color", "Red");
+
+            robot.right.setPower(vel);
+            robot.left.setPower(-vel);
+            sleep(time);
+            robot.right.setPower(-vel);
+            robot.left.setPower(vel);
+            sleep(time);
+            robot.right.setPower(0);
+            robot.left.setPower(0);
+        }else {
+            telemetry.addData("Ball Color", "Blue");
+
+            robot.right.setPower(-vel);
+            robot.left.setPower(vel);
+            sleep(time);
+            robot.right.setPower(vel);
+            robot.left.setPower(-vel);
+            sleep(time);
+            robot.right.setPower(0);
+            robot.left.setPower(0);
+        }
+        telemetry.update();
+
+        // Espera un poco... un poquiiiito mááááás
+        sleep(1000);
+
+        // Sube el sensor
+        robot.claw3.setPosition(0.02);
+
+        // Espera para que deje que los motores suban
+        sleep(1000);
+
+        // Cierra las garras para agarrar el bloque de enfrente
         robot.claw1.setPosition(0.3);
         robot.claw2.setPosition(0.7);
 
-        sleep(1000);     // pause for servos to move
-
-        moverElevador(0.5, -1);
-
-        sleep(4000);
-
-        telemetry.addData("Path", "Complete");
-        telemetry.update();
+        // Espera para que deje que los motores hagan lo suyo
+        sleep(5000);
     }
 
     public void moverElevador(double timeoutS, double speed) {
         robot.elevator.setPower(speed);
         runtime.reset();
-        while (runtime.time() < timeoutS) {}
+        sleep((long) timeoutS * 1000);
         robot.elevator.setPower(0);
     }
 

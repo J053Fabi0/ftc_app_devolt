@@ -15,4 +15,4 @@ alpha:
         5 - Servo = 6thClawServo
 
     Sensores **** AÑADIR A CONFIG ****
-        x = colorSensor
+        0 = colorSensor
