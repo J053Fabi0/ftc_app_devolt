@@ -48,10 +48,10 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
         waitForStart();
 
         // Baja el sensor a las pelotas ( ͡° ͜ʖ ͡°)
-        robot.claw3.setPosition(0.6);
+        robot.claw3.setPosition(1);
 
-        // Espera por precausión
-        sleep(1000);
+        // Espera por precaución
+        sleep(500);
 
         // Actualiza el sensor y determina si la pelota es azul o roja
         robot.colors = robot.colorSensor.getNormalizedColors();
@@ -62,6 +62,8 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
         if (robot.colors.red > robot.colors.blue) {
             telemetry.addData("Ball Color", "Red");
 
+            encoderDrive(DRIVE_SPEED,10, -10, .1);
+            encoderDrive(DRIVE_SPEED,-10,10,.1);
             robot.right.setPower(vel);
             robot.left.setPower(-vel);
             sleep(time);
@@ -73,6 +75,8 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
         }else {
             telemetry.addData("Ball Color", "Blue");
 
+            encoderDrive(DRIVE_SPEED,-10, 10, .1);
+            encoderDrive(DRIVE_SPEED,10, -10, .1);
             robot.right.setPower(-vel);
             robot.left.setPower(vel);
             sleep(time);
@@ -84,7 +88,7 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
         }
         telemetry.update();
 
-        // Espera un poco... un poquiiiito mááááás
+        // Espera un poco... un poquiiiito mááááás para avanzar al zooonde del safee
         sleep(1000);
 
         // Sube el sensor
@@ -99,6 +103,8 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
 
         // Espera para que deje que los motores hagan lo suyo
         sleep(5000);
+
+
     }
 
     public void moverElevador(double timeoutS, double speed) {
