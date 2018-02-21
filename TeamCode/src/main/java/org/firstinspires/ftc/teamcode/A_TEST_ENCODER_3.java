@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 
-@Autonomous(name="Prueba con Encoders 3", group="Pruebas ")
+@Autonomous(name="Alianza Azul. Lado A.", group="Gaia")
 
 public class A_TEST_ENCODER_3 extends LinearOpMode {
 
@@ -23,16 +23,12 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
     static final double WHEEL_DIAMETER_INCHES = 3.8 ;     // For figuring circumference
     static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.14159265358979323846);
     static final double DRIVE_SPEED = 0.6;
-    static final double TURN_SPEED = 0.5;
+    static final double TURN_SPEED = 0.4;
 
     @Override
     public void runOpMode() {
 
-        /*
-         * Initialize the drive system variables.
-         * The init() method of the hardware class does all the work here
-         */
-        robot.init(hardwareMap);
+        robot.init(hardwareMap); //Inicia el HardwareMap
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Resetting Encoders");    //
@@ -49,9 +45,10 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
 
         // Baja el sensor a las pelotas ( ͡° ͜ʖ ͡°)
         robot.claw3.setPosition(1);
+        cerrar();
 
         // Espera por precaución
-        sleep(500);
+        sleep(800);
 
         // Actualiza el sensor y determina si la pelota es azul o roja
         robot.colors = robot.colorSensor.getNormalizedColors();
@@ -59,47 +56,41 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
         double vel = 0.01;
         int time = 500;
 
+        //If de color (?)
         if (robot.colors.red > robot.colors.blue) {
             telemetry.addData("Ball Color", "Red");
 
-            encoderDrive(DRIVE_SPEED,10, -10, .1);
-            encoderDrive(DRIVE_SPEED,-10,10,.1);
-            robot.right.setPower(vel);
-            robot.left.setPower(-vel);
-            sleep(time);
-            robot.right.setPower(-vel);
-            robot.left.setPower(vel);
-            sleep(time);
-            robot.right.setPower(0);
-            robot.left.setPower(0);
-        }else {
+            encoderDrive(TURN_SPEED,10, -10, .1);
+            sleep(200);
+            robot.claw3.setPosition(0.02);
+            sleep(200);
+            encoderDrive(TURN_SPEED,-10,10,.1);
+
+        } else {
             telemetry.addData("Ball Color", "Blue");
 
-            encoderDrive(DRIVE_SPEED,-10, 10, .1);
-            encoderDrive(DRIVE_SPEED,10, -10, .1);
-            robot.right.setPower(-vel);
-            robot.left.setPower(vel);
-            sleep(time);
-            robot.right.setPower(vel);
-            robot.left.setPower(-vel);
-            sleep(time);
-            robot.right.setPower(0);
-            robot.left.setPower(0);
+            encoderDrive(TURN_SPEED,-10, 10, .1);
+            sleep(200);
+            robot.claw3.setPosition(.02);
+            sleep(200);
+            encoderDrive(TURN_SPEED,10, -10, .1);
         }
+
+        telemetry.addData("Status: ","Gema derribada");
         telemetry.update();
 
-        // Espera un poco... un poquiiiito mááááás para avanzar al zooonde del safee
-        sleep(1000);
+        //Giro hacia los bloques
+        encoderDrive(DRIVE_SPEED,10,10,.55); //Baja de la plataforma
+        encoderDrive(TURN_SPEED,-10,10,.8); //Gira para voltear a los pilares
+        encoderDrive(DRIVE_SPEED,10,10,.8); //Derecho
+        //encoderDrive(TURN_SPEED,-10,10,.6); //Gira izquierda
+        //encoderDrive(DRIVE_SPEED,10,10,.1);//Avance
+        //encoderDrive(TURN_SPEED,10,-10,.6);//gira a la derecha
+        //encoderDrive(DRIVE_SPEED,10,10,.2); //Derecho
+         abrir();//Abrir garra
+       // encoderDrive(DRIVE_SPEED,-10,-10,.1); //Reversa
 
-        // Sube el sensor
-        robot.claw3.setPosition(0.02);
 
-        // Espera para que deje que los motores suban
-        sleep(1000);
-
-        // Cierra las garras para agarrar el bloque de enfrente
-        robot.claw1.setPosition(0.3);
-        robot.claw2.setPosition(0.7);
 
         // Espera para que deje que los motores hagan lo suyo
         sleep(5000);
@@ -164,4 +155,15 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
             sleep(250);   // pause after each move
         }
     }
-}
+
+    public void abrir () {
+        robot.claw1.setPosition(0.02);
+        robot.claw2.setPosition(0.8);
+    }
+        public void cerrar () {
+            robot.claw2.setPosition(.3);
+            robot.claw1.setPosition(.7);
+
+        }
+    }
+
