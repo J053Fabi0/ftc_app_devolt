@@ -1,22 +1,17 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import android.graphics.Color;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.SwitchableLight;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
+@Autonomous(name="Alianza Rojo. Lado B.", group="Gaia")
 
-@Autonomous(name="Vuforia Auto.", group="Gaia")
-
-public class A_TEST_ENCODER_3 extends LinearOpMode {
+public class A_TEST_ENCODER_6 extends LinearOpMode {
 
 
     /* Declare OpMode members. */
     A_TEST_ENCODER_3_Hardware robot = new A_TEST_ENCODER_3_Hardware() ;   // Use a Pushbot's hardware
-    VuforiaRelicRecov vuf = new VuforiaRelicRecov();
     private ElapsedTime runtime = new ElapsedTime();
 
     static final double COUNTS_PER_MOTOR_REV = 1220 ; // Andymark N everest 60 motor
@@ -27,11 +22,6 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
     static final double DRIVE_SPEED = 0.6;
     static final double TURN_SPEED = 0.4;
 
-    int clr=3;
-
-    public void setClr(int value) {
-        clr = value;
-    }
 
     @Override
     public void runOpMode() {
@@ -65,10 +55,10 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
         double vel = 0.01;
         int time = 500;
 
-        vuf.runOpMode();
+
 
         //If de color (?)
-        if (robot.colors.red > robot.colors.blue) {
+        if (robot.colors.blue > robot.colors.red) {
             telemetry.addData("Ball Color", "Red");
 
             encoderDrive(TURN_SPEED,10, -10, .1);
@@ -89,31 +79,17 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
 
         telemetry.addData("Status: ","Gema derribada");
         telemetry.update();
-        //Gira para ver la imagen
-        encoderDrive(.2,10,-10,.4);
-        encoderDrive(.2,10,10,.2);
-//Center=2 Left=0 Right=1
-        //Va al centro
-        if (clr==2){
 
-
-        }
-        //Va a la izquierda
-        else if (clr==0){
+        encoderDrive(.2,10,10,.6);//Derecho
+        encoderDrive(.2,10,-10,.9);//Izquierda
+        encoderDrive(.3,10,10,.6);//derecho
+        encoderDrive(.2,10,-10,.945);//Izquierdo
+        encoderDrive(.2,10,10,.8);//derecho
+        abrir();
 
         }
-        //Va a la derecha
-        else if (clr==1){
-
-        }
-        //Se estaciona (falla vuforia)
-        else{
-            encoderDrive(DRIVE_SPEED,10,10,.7);
-            telemetry.addData("No se allo la imagen", "error");
-        }
 
 
-    }
 
     public void moverElevador(double timeoutS, double speed) {
         robot.elevator.setPower(speed);
@@ -178,8 +154,8 @@ public class A_TEST_ENCODER_3 extends LinearOpMode {
         robot.claw2.setPosition(0.8);
     }
         public void cerrar () {
-            robot.claw2.setPosition(.3);
-            robot.claw1.setPosition(.7);
+            robot.claw2.setPosition(.2);
+            robot.claw1.setPosition(.8);
 
         }
     }

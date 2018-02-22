@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  */
 
 
-@TeleOp (name="2Garras 1", group = "Pruebas")
+@TeleOp (name="TeleOP", group = "Control")
 public class T_TEST_CLAW_1 extends OpMode{
 
     public DcMotor left;

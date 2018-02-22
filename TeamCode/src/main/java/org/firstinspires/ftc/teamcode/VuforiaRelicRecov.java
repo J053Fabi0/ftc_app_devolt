@@ -22,8 +22,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 /**
  * Created by Lane Doak of Recharged Orange on 9/9/17.
  */
-@Autonomous(name = "VuforiaRelic", group = "Vuforia")
-@Disabled
+@Autonomous(name = "VuforiaRelic Test", group = "Vuforia")
+
 public class VuforiaRelicRecov extends LinearOpMode
 {
     OpenGLMatrix lastLocation = null; // WARNING: VERY INACCURATE, USE ONLY TO ADJUST TO FIND IMAGE AGAIN! DO NOT BASE MAJOR MOVEMENTS OFF OF THIS!!
@@ -34,6 +34,8 @@ public class VuforiaRelicRecov extends LinearOpMode
     double rX; // X value extracted from the rotational components of the tartget relitive to the robot
     double rY; // Same as above but for Y
     double rZ; // Same as above but for Z
+
+    A_TEST_ENCODER_3 test = new A_TEST_ENCODER_3();
 
     DcMotor right; // Random Motor
     DcMotor left; // Random Motor
@@ -47,7 +49,7 @@ public class VuforiaRelicRecov extends LinearOpMode
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
         parameters.vuforiaLicenseKey = "AUUUBeX/////AAAAmSUGvaUq2kWOu2xcX6kAVQ1hodp/FRCLkfKt706PralxoLescxwinKdhrH2bzwEppyrFSMM5qZUz3UicEdIqaDnnpaE31yhe2Y/7utckvKVjne///W0IGy+dQhpNoaPutzOghDTrCY/lVVBW4GyubwVUS5S1VXls6vCFCLLbdh5+KAVl3mWIVtIZQEGt2Dhtc7xRCtSt8zXlFzRaqgR8Ao1ZFsJjgV1dZofT73RXwaIuoLse8r3HRXEg06zrL5ew4PoqRhKsbaWZBY7gLkbLGIoOgh7F63CR2XxK62IcsJgvhUQPQZS5NWNZb2UwKGkTpsFXzBeNY+D+/17+p57qc8UlVFnG6rtG0Qu4Vr8BXsHz";
-        parameters.cameraDirection = VuforiaLocalizer.CameraDirection.FRONT; // Use FRONT Camera (Change to BACK if you want to use that one)
+        parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK; // Use FRONT Camera (Change to BACK if you want to use that one)
         parameters.cameraMonitorFeedback = VuforiaLocalizer.Parameters.CameraMonitorFeedback.AXES; // Display Axes
 
         this.vuforia = ClassFactory.createVuforiaLocalizer(parameters);
@@ -56,7 +58,6 @@ public class VuforiaRelicRecov extends LinearOpMode
         waitForStart();
 
         relicTrackables.activate(); // Activate Vuforia
-
         while (opModeIsActive())
         {
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
@@ -84,12 +85,18 @@ public class VuforiaRelicRecov extends LinearOpMode
                     telemetry.addData("X =", tX);
                     telemetry.addData("Y =", tY);
                     telemetry.addData("Z =", tZ);
+
+                    test.setClr(0);
+
                 } else if (vuMark == RelicRecoveryVuMark.RIGHT)
                 { // Test to see if Image is the "RIGHT" image and display values.
                     telemetry.addData("VuMark is", "Right");
                     telemetry.addData("X =", tX);
                     telemetry.addData("Y =", tY);
                     telemetry.addData("Z =", tZ);
+
+                    test.setClr(1);
+
                 } else if (vuMark == RelicRecoveryVuMark.CENTER)
                 { // Test to see if Image is the "CENTER" image and display values.
                     telemetry.addData("VuMark is", "Center");
@@ -97,10 +104,13 @@ public class VuforiaRelicRecov extends LinearOpMode
                     telemetry.addData("Y =", tY);
                     telemetry.addData("Z =", tZ);
 
+                    test.setClr(2);
+
                 }
             } else
             {
                 telemetry.addData("VuMark", "not visible");
+                test.setClr(3);
             }
             telemetry.update();
         }
