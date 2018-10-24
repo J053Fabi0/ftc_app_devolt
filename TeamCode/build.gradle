@@ -15,5 +15,23 @@
 apply from: '../build.common.gradle'
 
 android {
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '28.0.2'
 }
+buildscript {
+
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.0'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
